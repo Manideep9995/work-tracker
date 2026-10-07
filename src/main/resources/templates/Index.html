@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Work Tracker</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <header class="header">
+        <div>
+            <h1>📝 Work Tracker</h1>
+            <p>Keep track of your daily work</p>
+        </div>
+    </header>
+
+
+    <!-- Add Work -->
+    <section class="add-work-card">
+
+        <h2>Add New Work</h2>
+
+        <form th:action="@{/works}"
+              th:object="${workItemRequest}"
+              method="post">
+
+            <div class="form-group">
+
+                <label for="title">Work</label>
+
+                <input
+                        id="title"
+                        type="text"
+                        th:field="*{title}"
+                        placeholder="What do you need to do?"
+                        maxlength="200"
+                        autocomplete="off">
+
+                <p class="error"
+                   th:if="${#fields.hasErrors('title')}"
+                   th:errors="*{title}">
+                </p>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="description">Description</label>
+
+                <textarea
+                        id="description"
+                        th:field="*{description}"
+                        placeholder="Description (optional)"
+                        maxlength="1000"
+                        rows="3">
+                </textarea>
+
+                <p class="error"
+                   th:if="${#fields.hasErrors('description')}"
+                   th:errors="*{description}">
+                </p>
+
+            </div>
+
+
+            <button type="submit"
+                    class="add-button">
+                + Add Work
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- Pending Work -->
+    <section class="work-section">
+
+        <div class="section-header">
+
+            <h2>Pending Work</h2>
+
+            <span class="count pending-count"
+                  th:text="${pendingWorks.size()}">
+                0
+            </span>
+
+        </div>
+
+
+        <div th:if="${pendingWorks.isEmpty()}"
+             class="empty-state">
+
+            <div class="empty-icon">🎉</div>
+
+            <p>No pending work!</p>
+
+            <span>You're all caught up.</span>
+
+        </div>
+
+
+        <div class="work-list"
+             th:unless="${pendingWorks.isEmpty()}">
+
+            <div class="work-card"
+                 th:each="work : ${pendingWorks}">
+
+                <div class="work-content">
+
+                    <h3 th:text="${work.title}">
+                        Work title
+                    </h3>
+
+                    <p class="description"
+                       th:if="${work.description != null and !work.description.isEmpty()}"
+                       th:text="${work.description}">
+                    </p>
+
+                    <p class="created-time">
+
+                        Added:
+                        <span th:text="${#temporals.format(
+                                work.createdAt,
+                                'dd MMM yyyy, hh:mm a'
+                        )}">
+                        </span>
+
+                    </p>
+
+                </div>
+
+
+                <div class="work-actions">
+
+                    <form
+                            th:action="@{/works/{id}/complete(id=${work.id})}"
+                            method="post">
+
+                        <button type="submit"
+                                class="complete-button">
+                            ✓ Complete
+                        </button>
+
+                    </form>
+
+
+                    <form
+                            th:action="@{/works/{id}/delete(id=${work.id})}"
+                            method="post"
+                            onsubmit="return confirm('Are you sure you want to delete this work?');">
+
+                        <button type="submit"
+                                class="delete-button">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Completed Work -->
+    <section class="work-section completed-section">
+
+        <div class="section-header">
+
+            <h2>Completed Work</h2>
+
+            <span class="count completed-count"
+                  th:text="${completedWorks.size()}">
+                0
+            </span>
+
+        </div>
+
+
+        <div th:if="${completedWorks.isEmpty()}"
+             class="empty-state">
+
+            <div class="empty-icon">📋</div>
+
+            <p>No completed work yet.</p>
+
+            <span>Completed tasks will appear here.</span>
+
+        </div>
+
+
+        <div class="work-list"
+             th:unless="${completedWorks.isEmpty()}">
+
+            <div class="work-card completed-card"
+                 th:each="work : ${completedWorks}">
+
+                <div class="work-content">
+
+                    <h3>
+                        <span class="completed-icon">✓</span>
+
+                        <span th:text="${work.title}">
+                            Completed work
+                        </span>
+                    </h3>
+
+
+                    <p class="description"
+                       th:if="${work.description != null and !work.description.isEmpty()}"
+                       th:text="${work.description}">
+                    </p>
+
+
+                    <div class="completed-times">
+
+                        <p>
+                            Added:
+                            <span th:text="${#temporals.format(
+                                    work.createdAt,
+                                    'dd MMM yyyy, hh:mm a'
+                            )}">
+                            </span>
+                        </p>
+
+                        <p>
+                            Completed:
+                            <span th:text="${#temporals.format(
+                                    work.completedAt,
+                                    'dd MMM yyyy, hh:mm a'
+                            )}">
+                            </span>
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="work-actions">
+
+                    <form
+                            th:action="@{/works/{id}/delete(id=${work.id})}"
+                            method="post"
+                            onsubmit="return confirm('Are you sure you want to delete this work?');">
+
+                        <button type="submit"
+                                class="delete-button">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            Work Tracker
+            •
+            Daily email summary at 9:00 AM & 12:00 AM
+        </p>
+
+    </footer>
+
+</div>
+
+</body>
+</html>

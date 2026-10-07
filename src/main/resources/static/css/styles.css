@@ -1,0 +1,342 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+    line-height: 1.5;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px 50px;
+}
+
+
+/* =========================
+   Header
+   ========================= */
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 32px;
+    margin-bottom: 6px;
+}
+
+.header p {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+
+/* =========================
+   Add Work
+   ========================= */
+
+.add-work-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 35px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.add-work-card h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #2563eb;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.add-button {
+    border: none;
+    background: #2563eb;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background: #1d4ed8;
+}
+
+
+/* =========================
+   Sections
+   ========================= */
+
+.work-section {
+    margin-bottom: 35px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.section-header h2 {
+    font-size: 22px;
+}
+
+.count {
+    min-width: 28px;
+    height: 28px;
+    padding: 0 8px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.pending-count {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.completed-count {
+    background: #dcfce7;
+    color: #166534;
+}
+
+
+/* =========================
+   Work Cards
+   ========================= */
+
+.work-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.work-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.work-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.work-content h3 {
+    font-size: 17px;
+    margin-bottom: 6px;
+    word-break: break-word;
+}
+
+.description {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 10px;
+    word-break: break-word;
+}
+
+.created-time,
+.completed-times p {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.work-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.work-actions form {
+    margin: 0;
+}
+
+.complete-button,
+.delete-button {
+    border: none;
+    padding: 9px 13px;
+    border-radius: 7px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.complete-button {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.complete-button:hover {
+    background: #bbf7d0;
+}
+
+.delete-button {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.delete-button:hover {
+    background: #fecaca;
+}
+
+
+/* =========================
+   Completed
+   ========================= */
+
+.completed-card {
+    opacity: 0.85;
+}
+
+.completed-card h3 {
+    color: #4b5563;
+}
+
+.completed-icon {
+    color: #16a34a;
+    margin-right: 5px;
+}
+
+.completed-times {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+
+/* =========================
+   Empty State
+   ========================= */
+
+.empty-state {
+    background: white;
+    border-radius: 10px;
+    padding: 35px 20px;
+    text-align: center;
+    color: #6b7280;
+}
+
+.empty-icon {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.empty-state span {
+    font-size: 14px;
+}
+
+
+/* =========================
+   Validation
+   ========================= */
+
+.error {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+
+/* =========================
+   Footer
+   ========================= */
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+
+/* =========================
+   Mobile
+   ========================= */
+
+@media (max-width: 650px) {
+
+    .container {
+        padding: 20px 12px 40px;
+    }
+
+    .header h1 {
+        font-size: 27px;
+    }
+
+    .add-work-card {
+        padding: 20px;
+    }
+
+    .work-card {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .work-actions {
+        width: 100%;
+    }
+
+    .work-actions form {
+        flex: 1;
+    }
+
+    .complete-button,
+    .delete-button {
+        width: 100%;
+        padding: 10px;
+    }
+}
